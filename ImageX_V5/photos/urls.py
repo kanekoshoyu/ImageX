@@ -31,6 +31,7 @@ urlpatterns =[
     url(r'^delete/(?P<pk>[0-9]+)/$', views.PictureDelete, name='picture_delete'),
     url(r'^like/(?P<picture_pk>(\d+))/$', views.like, name='like'),
     url(r'^download/(?P<picture_pk>\w+)/$', views.download, name='download'),
+    url(r'^addTag/$', views.addTag, name='addTag'),
     #url(r'^sortByPopularity/$', views.sortByPopularity, name='sortByPopularity'),
 
 

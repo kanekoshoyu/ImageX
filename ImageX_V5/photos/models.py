@@ -43,6 +43,7 @@ class Picture(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
     date = models.DateTimeField(default=datetime.now, blank=True)
+    #uploader = models.ForeignKey(User, on_delete = models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('photos:detail', kwargs={'pk': self.pk})

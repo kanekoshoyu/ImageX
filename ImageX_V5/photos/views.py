@@ -195,3 +195,8 @@ def download(request, picture_pk):
     response = HttpResponse(pic.file, content_type='text/plain')
     response['Content-Disposition'] = 'attachment; filename=%s' % filename
     return response
+
+def addTag(request):
+    tagText = request.GET.get("q")
+    Tag.objects.create(text=tagText)
+    return redirect('/photos/profile/')

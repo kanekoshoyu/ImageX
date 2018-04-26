@@ -17,6 +17,11 @@
     <a class="btn" href="{% url 'photos:picture-add' %}">Upload Image</a>
     <a class="btn" href="/photos/profile/image">Manage Your Photos</a>
     <a class="btn" href="/photos/logout">Log Out</a>
+
+    <form role="search" method="get" action="{% url 'photos:addTag' %}">
+        <p>Create your own tag! </p>
+        <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
+    </form>
     <br>
 </div>
 
