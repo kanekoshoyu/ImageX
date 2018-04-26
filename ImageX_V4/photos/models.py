@@ -53,6 +53,9 @@ class Picture(models.Model):
     def countLike(self):
         return self.like_set.count()
 
+    def countDownload(self):
+        return self.download_set.count()
+
 class Like(models.Model):
     member = models.ForeignKey(User, on_delete = models.CASCADE)
     picture = models.ForeignKey(Picture, on_delete = models.CASCADE)

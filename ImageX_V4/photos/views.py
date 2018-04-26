@@ -10,6 +10,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import get_object_or_404
+from django.conf import settings
+import os
 #forms
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -172,6 +174,9 @@ def friend_accept(request, code):
 
 def like(request, picture_pk):
     print("Liking (View Function)")
+    #To be Done: 
+    # check if the user has liked the photo in the past
+    # unlike
     pic = Picture.objects.get(pk=picture_pk)
     like = Like.objects.create(member=request.user, picture=pic)
     like.print()
@@ -179,7 +184,12 @@ def like(request, picture_pk):
 
 def download(request, picture_pk):
     print("Downloading (View Function)")
-    pic = Picture.objects.get(pk=picture_pk)
-    download = Download.objects.create(picture=pic)
-    download.print()
+    pic_path = Picture.objects.get(pk=picture_pk).file.url
+    file_path = os.path.join(settings.MEDIA_ROOT, pic_path)
+    print(file_path)
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
     return redirect('/photos/')
