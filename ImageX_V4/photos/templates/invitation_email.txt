@@ -1,9 +1,0 @@
-Hi {{ name }},
-
-{{ sender }} invited you to join ImageX, 
-  a website where you can post and share your photos with professional photographers!
-
-To accept the invitation, please click the link below:
-{{ link }}
-
--- ImageX Team K
