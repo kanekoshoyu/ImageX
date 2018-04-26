@@ -1,0 +1,12 @@
+{% extends 'topbar.html' %}
+
+{% block body %}
+<p1>Picture Title: {{ object.title }}</p1><br>
+<p1>Picture Description: {{ object.description }}</p1><br>
+<p1>Picture Category: {{ object.category }} </p1><br>
+<p1>Picture Tag: {{ object.tag }}</p1><br>
+    <p1>Uploader: {{ object.uploader_name }}</p1><br>
+
+
+<img src="{{ object.file.url }}" width="300" height="200">
+{% endblock %}

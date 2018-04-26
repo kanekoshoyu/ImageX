@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ImageX</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<body>
+<nav class ="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header navbar-brand">
+            <a href="{% url 'photos:index' %}"><span>ImageX</span></a>
+        </div>
+
+
+        <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'photos:index' %}">
+            <div class="form-group">
+                <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
+                <button type="submit" name="tagSearch" class="btn btn-default">Tag</button>
+                <button type="submit" name="categorySearch" class="btn btn-default">Category</button>
+                <button type="submit" name="photographerSearch" class="btn btn-default">Photographer</button>
+            </div>
+        </form>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="{% url 'photos:picture-add' %}">
+                    <span>Upload</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="{% url 'photos:login' %}">
+                    <span>Login</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+{% block body %}
+{% endblock %}
+
+</body>
+</html>
