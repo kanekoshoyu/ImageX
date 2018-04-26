@@ -37,6 +37,23 @@
                                             </a><br>
                                             Likes: {{ picture.likeCount }}
                                         </td>
+                                        <td>
+                                        
+                                        {% if user.is_authenticated %}
+                                        <form method="get" action="{% url 'photos:like' picture.pk %}">
+                                            <button type="submit" class="btn btn-default">
+                                                <span class="glyphicon glyphicon-thumbs-up"></span> Like
+                                            </button>
+                                        </form>
+                                        {% else %}
+                                        <p>Be a member to like a picture!</p>
+                                        {% endif %}
+                                        <form method="get" action="{% url 'photos:download' picture.pk %}">
+                                            <button type="submit" class="btn btn-default">
+                                                <span class="glyphicon glyphicon glyphicon-save"></span> Download
+                                            </button>
+                                        </form>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

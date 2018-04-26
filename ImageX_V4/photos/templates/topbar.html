@@ -28,19 +28,17 @@
 
             </div>
         </form>
-
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="/photos/profile">
-                    <span>My Profile</span>
-                </a>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a href="{% url 'photos:login' %}">
-                    <span>Login</span>
-                </a>
+                {% if user.is_authenticated %}
+                    <a href="/photos/profile">
+                        <span>My Profile</span>
+                    </a>
+                {% else %}
+                    <a href="{% url 'photos:login' %}">
+                        <span>Login</span>
+                    </a>
+                {% endif %}
             </li>
         </ul>
     </div>

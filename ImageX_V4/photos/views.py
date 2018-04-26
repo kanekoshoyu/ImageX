@@ -170,3 +170,12 @@ def friend_accept(request, code):
     request.session['invitation'] = invitation.id
     return redirect('/photos/register/')
 
+def like(request, picture_pk):
+    pic = Picture.objects.get(pk=picture_pk)
+    pic.like()
+    return redirect('/photos/')
+
+def download(request, picture_pk):
+    pic = Picture.objects.get(pk=picture_pk)
+    pic.download()
+    return redirect('/photos/')

@@ -42,8 +42,6 @@ class Picture(models.Model):
     uploader_name = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
-
-    likeCount = models.IntegerField(default=0)
     date = models.DateTimeField(default=datetime.now, blank=True)
 
     def get_absolute_url(self):
@@ -51,6 +49,25 @@ class Picture(models.Model):
 
     def __str__(self):
         return self.title + '-' + self.description
+
+    def like(self):
+        #this is not working...
+        #Like.objects.create(picture=self, member=request.user)
+        print("Liking (Class Function)")
+        return "Liked"
+
+    def download(self):
+        #this is not working...
+        print("Downloading (Class Function)")
+        return "Downloading"
+
+class Like(models.Model):
+    member = models.ForeignKey(User, on_delete = models.CASCADE)
+    picture = models.ForeignKey(Picture, on_delete = models.CASCADE)
+
+class Download(models.Model):
+    member = models.ForeignKey(User, on_delete = models.CASCADE)
+    picture = models.ForeignKey(Picture, on_delete = models.CASCADE)
 
 class member(models.Model):
     user_name = models.CharField(max_length=100)
