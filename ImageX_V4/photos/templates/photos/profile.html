@@ -1,0 +1,22 @@
+{% extends 'topbar.html' %}
+
+{% block head %}
+    <title>Profile</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+<h1>Profile</h1>
+    <p>Username:{{ user }}</p>
+    <p>First name:{{ user.first_name }}</p>
+    <p>Last name:{{ user.last_name }}</p>
+    <p>Email:{{ user.email }}</p>
+    <p>Description:{{ user.description }}</p>
+    <a class="btn" href="/photos/invite">Invite Friend</a>
+    <a class="btn" href="/photos/profile/edit">Edit Your Profile</a>
+    <a class="btn" href="{% url 'photos:picture-add' %}">Upload Image</a>
+    <a class="btn" href="/photos/profile/image">Manage Your Photos</a>
+    <br>
+</div>
+
+{%  endblock %}
