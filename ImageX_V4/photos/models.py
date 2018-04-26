@@ -6,7 +6,9 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.template.loader import get_template
 from django.template import Context
+import os
 from django.conf import settings
+from django.http import HttpResponse
 
 
 class Gallery(models.Model):
@@ -46,11 +48,13 @@ class Picture(models.Model):
 
     def like(self):
         #this is not working...
-        self.likeCount = self.likeCount+1
+        #Like.objects.create(picture=self, member=request.user)
+        print("Liking (Class Function)")
         return "Liked"
 
     def download(self):
         #this is not working...
+        print("Downloadiing (Class Function)")
         return "Downloading"
 
 class Like(models.Model):

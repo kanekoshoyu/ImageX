@@ -22,8 +22,6 @@ urlpatterns =[
     url(r'^change-password/$',views.change_password,name='change_password'),
     url(r'^invite/$', views.friend_invite, name='invite'),
     url(r'^accept/(?P<code>\w+)/$', views.friend_accept, name='friend_accept'),
-    
-
-
-
+    url(r'^download/(?P<pk>\w+)/$', views.download, name='download'),
+    url(r'^like/(?P<pk>\w+)/$', views.like, name='like'),
 ]

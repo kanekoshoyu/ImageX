@@ -27,6 +27,20 @@
                                         <td>
                                             <img src="{{ picture.file.url }}" width="300" height="200">
                                         </td>
+                                        <td>
+                                            
+                                        <form method="get" action="{% url 'photos:like' picture.pk %}">
+                                            <button type="submit" class="btn btn-default">
+                                                <span class="glyphicon glyphicon-thumbs-up"></span> Like
+                                            </button>
+                                        </form>
+                                        <form method="get" action="{% url 'photos:download' picture.pk %}">
+                                            <button type="submit" class="btn btn-default">
+                                                <span class="glyphicon glyphicon glyphicon-save"></span> Download
+                                            </button>
+                                        </form>
+                                        </td>
+                                        
                                     </tr>
                                 {% endfor %}
                             </tbody>

@@ -1,5 +1,5 @@
 from django.http import HttpResponse, Http404
-from .models import Picture, Tag, Category, Invitation
+from .models import Picture, Tag, Category, Invitation, Download, Like
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
@@ -10,7 +10,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import get_object_or_404
-#forms
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
@@ -130,3 +129,12 @@ def friend_accept(request, code):
     request.session['invitation'] = invitation.id
     return redirect('/photos/register/')
 
+def download(request, pk):
+    pic = Picture.objects.get(pk=pk)
+    pic.download()
+    return redirect('/photos/')
+
+def like(request, pk):
+    pic = Picture.objects.get(pk=pk)
+    pic.like()
+    return redirect('/photos/')
