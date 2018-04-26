@@ -1,5 +1,5 @@
 from django.http import HttpResponse, Http404
-from .models import Picture, Tag, Category, Invitation
+from .models import Picture, Tag, Category, Invitation, Download, Like
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
@@ -171,11 +171,15 @@ def friend_accept(request, code):
     return redirect('/photos/register/')
 
 def like(request, picture_pk):
+    print("Liking (View Function)")
     pic = Picture.objects.get(pk=picture_pk)
-    pic.like()
+    like = Like.objects.create(member=request.user, picture=pic)
+    like.print()
     return redirect('/photos/')
 
 def download(request, picture_pk):
+    print("Downloading (View Function)")
     pic = Picture.objects.get(pk=picture_pk)
-    pic.download()
+    download = Download.objects.create(picture=pic)
+    download.print()
     return redirect('/photos/')

@@ -50,24 +50,21 @@ class Picture(models.Model):
     def __str__(self):
         return self.title + '-' + self.description
 
-    def like(self):
-        #this is not working...
-        #Like.objects.create(picture=self, member=request.user)
-        print("Liking (Class Function)")
-        return "Liked"
-
-    def download(self):
-        #this is not working...
-        print("Downloading (Class Function)")
-        return "Downloading"
+    def countLike(self):
+        #count likes here
+        
+        return None
 
 class Like(models.Model):
     member = models.ForeignKey(User, on_delete = models.CASCADE)
     picture = models.ForeignKey(Picture, on_delete = models.CASCADE)
+    def print(self):
+        print(str(self.member.pk)+" liked "+str(self.picture.pk))
 
 class Download(models.Model):
-    member = models.ForeignKey(User, on_delete = models.CASCADE)
     picture = models.ForeignKey(Picture, on_delete = models.CASCADE)
+    def print(self):
+        print(str(self.picture.pk)+" was downloaded")
 
 class Invitation(models.Model):
     name = models.CharField(max_length=50)
