@@ -51,9 +51,7 @@ class Picture(models.Model):
         return self.title + '-' + self.description
 
     def countLike(self):
-        #count likes here
-        
-        return None
+        return self.like_set.count()
 
 class Like(models.Model):
     member = models.ForeignKey(User, on_delete = models.CASCADE)
