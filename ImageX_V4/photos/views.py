@@ -17,7 +17,6 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 def index(request):
-    
     query = request.GET.get("q")
     if 'categorySearch' in request.GET:
         try:
@@ -41,7 +40,13 @@ def index(request):
     else:
         requiredPicture = Picture.objects.all()
     return render(request, 'index.html', {'pictures': requiredPicture})
-        
+
+"""
+def sortByPopularity(request, requiredPicture):
+    new_picture_set = requiredPicture.order_by('popularity')
+    return render(request, 'index.html', {'pictures': new_picture_set})
+"""
+
 def view_photographer(request):
     query = request.GET.get("q")
     pictures = Picture.objects.all()
@@ -183,13 +188,10 @@ def like(request, picture_pk):
     return redirect('/photos/')
 
 def download(request, picture_pk):
+    pic = Picture.objects.get(pk=picture_pk)
+    download = Download.objects.create(picture=pic)
     print("Downloading (View Function)")
-    pic_path = Picture.objects.get(pk=picture_pk).file.url
-    file_path = os.path.join(settings.MEDIA_ROOT, pic_path)
-    print(file_path)
-    if os.path.exists(file_path):
-        with open(file_path, 'rb') as fh:
-            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
-            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-            return response
-    return redirect('/photos/')
+    filename = pic.file.name.split('/')[-1]
+    response = HttpResponse(pic.file, content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename=%s' % filename
+    return response
