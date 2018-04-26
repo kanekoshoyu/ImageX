@@ -53,16 +53,13 @@ class Picture(models.Model):
         #this is not working...
         return "Downloading"
 
-class member(models.Model):
-    user_name = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
-    email_address = models.CharField(max_length=100)
-    description = models.CharField(max_length=1000)
-    
-    def get_absolute_url(self):
-        return reverse('photos:detail', kwargs={'pk': self.pk})
-    def __str__(self):
-        return self.title + '-' + self.description
+class Like(models.Model):
+    member = models.ForeignKey(User, on_delete = models.CASCADE)
+    picture = models.ForeignKey(Picture, on_delete = models.CASCADE)
+
+class Download(models.Model):
+    member = models.ForeignKey(User, on_delete = models.CASCADE)
+    picture = models.ForeignKey(Picture, on_delete = models.CASCADE)
 
 class Invitation(models.Model):
     name = models.CharField(max_length=50)
