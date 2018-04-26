@@ -1,0 +1,54 @@
+{% extends 'topbar.html' %}
+
+{% block head %}
+    <title>Manage your photos</title>
+{% endblock %}
+
+{% block body %}
+<div class="albums-container container-fluid">
+    <!-- If user searches and there are songs -->
+    {% if pictures %}
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Picture</h3>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Picture Title</th>
+                                    <th>Picture Description</td>
+                                    <td>Picture</td>
+                                    <td>Picture Homepage</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for picture in pictures %}
+                                    <tr>
+                                        <td>{{ picture.title }}</td>
+                                        <td>{{ picture.description }}</td>
+                                        <td>
+                                            <img src="{{ picture.file.url }}" width="300" height="200">
+                                        </td>
+                                        <td>
+                                            <a href="/photos/{{ picture.id }}">
+                                                Click Here to Access the Picture
+                                            </a><br>
+                                            <a href="/photos/delete/{{ picture.id }}">
+                                                Click Here to Delete the Picture
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}
