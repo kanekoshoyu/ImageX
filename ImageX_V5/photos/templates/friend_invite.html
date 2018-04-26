@@ -1,0 +1,16 @@
+{% extends "topbar.html" %}
+
+{% block body %}
+<h1>Invite A Friend</h1>
+
+<p>
+    Enter your friend name and email below, 
+    and click "Send Invitation" to invite your friend to join the site:
+</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Send Invitation" />
+</form>
+{% endblock %}

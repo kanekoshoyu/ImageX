@@ -1,0 +1,70 @@
+{% extends 'topbar.html' %}
+
+{% block body %}
+
+
+
+<div class="albums-container container-fluid">
+    <!-- If user searches and there are songs -->
+    {% if pictures %}
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Picture</h3>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Picture Title</th>
+                                    <th>Picture Description</td>
+                                    <td>Picture</td>
+                                    <td>Picture Info</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for picture in pictures %}
+                                    <tr>
+                                        <td>{{ picture.title }}</td>
+                                        <td>{{ picture.description }}</td>
+                                        <td>
+                                            <img src="{{ picture.file.url }}" width="300" height="200">
+                                        </td>
+                                        <td>
+                                            <a href="/photos/{{ picture.id }}">
+                                                Click Here to Access the Picture
+                                            </a><br>
+                                            Likes: {{ picture.countLike }}
+                                            <br>
+                                            Downloads: {{ picture.countDownload }}
+                                        </td>
+                                        <td>
+                                        
+                                        {% if user.is_authenticated %}
+                                        <form method="get" action="{% url 'photos:like' picture.pk %}">
+                                            <button type="submit" class="btn btn-default">
+                                                <span class="glyphicon glyphicon-thumbs-up"></span> Like
+                                            </button>
+                                        </form>
+                                        {% else %}
+                                        <p>Be a member to like a picture!</p>
+                                        {% endif %}
+                                        <form method="get" action="{% url 'photos:download' picture.pk %}">
+                                            <button type="submit" class="btn btn-default">
+                                                <span class="glyphicon glyphicon glyphicon-save"></span> Download
+                                            </button>
+                                        </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}
